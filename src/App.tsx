@@ -146,12 +146,12 @@ const App: React.FC = () => {
             </svg>
           </div>
           <div className="header-logo-wrap">
-            <img src={process.env.PUBLIC_URL + "/A_M.png"} alt="A&M logo" className="header-logo" />
+            <img src={process.env.PUBLIC_URL + "/A_M.png"} alt="logo" className="header-logo" />
           </div>
           <div className="header-text">
-            <h1>BTS Knowledge Search</h1>
+            <h1>Knowledge Search</h1>
             <p className="app-subtitle">
-              Search and analyze BTS Knowledge Content and Bios
+              Search and analyze Knowledge Content and Bios
             </p>
           </div>
         </header>
