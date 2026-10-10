@@ -1,7 +1,6 @@
 import { ChatMessage, FilterOptions, RankedDocument, SearchFilters, SearchMoreResponse } from "../types";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
-
 export async function fetchFilters(
   activeFilters?: SearchFilters,
   signal?: AbortSignal,

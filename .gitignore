@@ -75,3 +75,6 @@ data/*.csv
 Thumbs.db
 .idea/
 .vscode/
+/.agents
+/.claude
+/.firebase
