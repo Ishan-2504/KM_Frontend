@@ -170,14 +170,6 @@ body {
   background: #003459;
 }
 
-.action-btn-upload {
-  background: #003a6b;
-}
-
-.action-btn-upload:hover {
-  background: #003459;
-}
-
 .action-btn svg {
   width: 16px;
   height: 16px;

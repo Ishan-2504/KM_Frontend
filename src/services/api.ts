@@ -27,12 +27,6 @@ export async function healthCheck(): Promise<{ status: string; document_count: n
   return res.json();
 }
 
-export async function triggerIngest(): Promise<{ status: string }> {
-  const res = await fetch(`${API_URL}/api/ingest`, { method: "POST" });
-  if (!res.ok) throw new Error(`Ingest failed: ${res.statusText}`);
-  return res.json();
-}
-
 export function getSearchSSEUrl(): string {
   return `${API_URL}/api/search`;
 }

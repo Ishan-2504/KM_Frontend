@@ -176,29 +176,6 @@ const App: React.FC = () => {
           Search History
         </button>
 
-        <button
-          className="action-btn action-btn-upload"
-          onClick={() =>
-            window.open(
-              "https://apps.powerapps.com/play/e/e37605ef-1954-ed84-9955-2c2994868801/a/6642b425-fb80-4c9d-aa39-2a9319c61ab2?paSBU=BTS#",
-              "_blank"
-            )
-          }
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-          Upload New Document
-        </button>
       </div>
 
       <main className="main-content">
