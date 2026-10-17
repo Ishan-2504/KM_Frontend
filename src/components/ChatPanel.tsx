@@ -37,7 +37,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   const inputDisabled = streaming || searchLoading || !hasDocuments;
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Optional-call the method: it is missing in jsdom and some embedded webviews.
+    messagesEndRef.current?.scrollIntoView?.({ behavior: "smooth" });
   }, [messages, streaming]);
 
   const suggestions = useMemo(() => {

@@ -1,13 +1,209 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ==========================================================================
+   Knowledge Search — design tokens
+   Theme: "Meridian" (Swiss precision)
+     - hairline borders, no decorative shadows, ink (near-black) primary
+     - 4px radii, 1px rules, 150ms / cubic-bezier(.2,0,0,1) motion
+     - accent (blue) used sparingly for state and links only
+   Colour mode is driven by html[data-theme="light|dark"], resolved in
+   public/index.html before first paint and toggled from the header.
+   ========================================================================== */
+
+:root,
+html[data-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #f7f7f8;
+  --bg-img: none;
+  --surface: #ffffff;
+  --surface-2: #f0f0f2;
+
+  /* ink */
+  --text: #141416;
+  --muted: #5d5d66;
+  --border: #e1e1e6;
+  --border-strong: #c9c9d1;
+
+  /* interactive */
+  --primary: #141416;
+  --on-primary: #ffffff;
+  --accent: #2742e0;
+  --on-accent: #ffffff;
+  --focus: #2742e0;
+  --ring: color-mix(in srgb, var(--focus) 28%, transparent);
+
+  /* gradients (Meridian = flat, single hue) */
+  --g1: #2742e0;
+  --g2: #2742e0;
+
+  /* status */
+  --success: #157a3b;
+  --warning: #9a5506;
+  --error: #c21d1d;
+  --error-bg: color-mix(in srgb, var(--error) 8%, var(--surface));
+
+  /* states */
+  --hover: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --tint-accent: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  --tint-accent-border: color-mix(in srgb, var(--accent) 32%, transparent);
+  --tint-warning: color-mix(in srgb, var(--warning) 12%, var(--surface));
+  --tint-warning-border: color-mix(in srgb, var(--warning) 32%, transparent);
+  --tint-success: color-mix(in srgb, var(--success) 12%, var(--surface));
+  --tint-error: color-mix(in srgb, var(--error) 10%, var(--surface));
+
+  /* elevation — reserved for overlays only (Swiss: no card shadows) */
+  --shadow-sm: 0 1px 2px rgba(16, 17, 20, 0.06);
+  --shadow-md: 0 2px 10px rgba(16, 17, 20, 0.08);
+  --shadow-lg: 0 18px 44px -18px rgba(16, 17, 20, 0.38);
+
+  /* shape */
+  --r: 4px;
+  --radius: 4px;
+  --radius-lg: 4px;
+  --bw: 1px;
+
+  /* motion */
+  --dur: 150ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* skeleton / placeholder */
+  --tag-bg: var(--surface-2);
+  --tag-text: var(--text);
+
+  /* legacy aliases (kept so older rules keep resolving) */
+  --navy: var(--primary);
+  --navy-light: var(--surface-2);
+  --navy-grad-end: var(--primary);
+  --teal: var(--surface-2);
+  --teal-hover: var(--surface-2);
+  --accent-hover: color-mix(in srgb, var(--accent) 78%, var(--text));
+  --text-secondary: var(--muted);
+  --text-muted: var(--muted);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #040406;
+  /* Meridian's dark backdrop: a single soft glow at the top of the page. */
+  --bg-img: radial-gradient(
+    70% 45% at 50% -8%,
+    rgba(91, 124, 255, 0.22) 0,
+    transparent 70%
+  );
+  --surface: #0e0e13;
+  --surface-2: #18181f;
+
+  --text: #ffffff;
+  --muted: #a9a9b8;
+  --border: #26262f;
+  --border-strong: #3a3a45;
+
+  --primary: #ffffff;
+  --on-primary: #040406;
+  --accent: #8ea2ff;
+  --on-accent: #050816;
+  --focus: #8ea2ff;
+  --ring: color-mix(in srgb, var(--focus) 32%, transparent);
+
+  --g1: #5b7cff;
+  --g2: #c06bff;
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #ff6b6b;
+
+  --hover: color-mix(in srgb, var(--text) 8%, var(--surface));
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 12px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 20px 50px -16px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  font-variant-numeric: tabular-nums lining-nums;
+  background-color: var(--bg);
+  background-image: var(--bg-img);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* ── Focus: one visible, consistent ring everywhere ───────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ── Scrollbars ───────────────────────────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 99px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--text) 40%, transparent);
+  background-clip: content-box;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
